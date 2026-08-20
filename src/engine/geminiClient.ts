@@ -13,10 +13,12 @@ export function setGeminiApiKey(key: string) {
 }
 
 export function getGeminiApiKey(): string {
-  if (!apiKey) {
-    apiKey = localStorage.getItem('nexus_gemini_api_key') || '';
-  }
-  return apiKey;
+  return (
+    apiKey ||
+    localStorage.getItem('nexus_gemini_api_key') ||
+    import.meta.env.VITE_GEMINI_API_KEY ||
+    ''
+  );
 }
 
 export async function executeAgentInference(
